@@ -5,12 +5,12 @@ from datetime import datetime, timedelta
 # Configuración de la página estilo móvil
 st.set_page_config(page_title="Panel Nutricional Jovi", page_icon="🥗", layout="centered")
 
-# Inyectar CSS para limitar el ancho simulando una app móvil de 390px
+# CORRECCIÓN: Se cambió 'unsafe_index' por 'unsafe_allow_html'
 st.markdown("""
     <style>
     .block-container { max-width: 390px; padding-top: 2rem; padding-bottom: 2rem; }
     </style>
-""", unsafe_index=True)
+""", unsafe_allow_html=True)
 
 # Inicializar estados de la sesión si no existen
 if "desplazamiento" not in st.session_state: st.session_state.desplazamiento = 0
@@ -51,7 +51,7 @@ with pestaña[0]:
         estacion, frutas, verduras = "Otoño", ["Pera fresca", "Uvas locales", "Caqui Pérsimon", "Pera fresca", "Uvas locales", "Caqui Pérsimon", "Pera fresca"], ["Espinacas [M]", "Judía verde [M]", "Brócoli [M]", "Acelgas [M]", "Calabaza [M]", "Espinacas [M]", "Judía verde [M]"]
 
     # Selector de fecha (Header)
-    col1, col2, col3 = st.columns([1, 3, 1])
+    col1, col2, col3 = st.columns([1, 4, 1])
     with col1:
         if st.button("◀", key="prev"): st.session_state.desplazamiento -= 1; st.rerun()
     with col2:
