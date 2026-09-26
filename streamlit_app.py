@@ -79,7 +79,6 @@ def main(page: ft.Page):
             contenido_app.controls.append(ft.Text("Logística:", size=13, weight=ft.FontWeight.BOLD))
             contenido_app.controls.append(radio_logistica)
 
-            # CORREGIDO: Eliminado argumento 'size' para evitar fallos
             chk_magdalenas = ft.Checkbox(label="Marcar si comes Magdalenas", value=main.magdalenas, on_change=cambiar_magdalenas)
             txt_desayuno = "☕ Líquido: 125ml Leche entera\n🧁 Sólido: 2 Magdalenas valencianas\n⚠️ Backend: Penalización nocturna aplicada." if main.magdalenas else f"💧 Líquido: Agua fresca\n🍏 Sólido: 150g {fruta_hoy} de temporada\n❌ Alerta: Prohibida la manzana en la mañana."
             contenido_app.controls.append(crear_tarjeta_comida("Desayuno", txt_desayuno, chk_magdalenas))
@@ -111,8 +110,6 @@ def main(page: ft.Page):
             txt_cena = f"🍚 Carbohidrato: {peso_h}g de {hidrato_hoy}\n🥩 Proteína:     {peso_p}g de {prot_cena_hoy}\n🥦 Vegetal:      G: {verdura_hoy} (120g)\n🥑 Grasas/Pan:   {extras}"
             contenido_app.controls.append(crear_tarjeta_comida("Cena", txt_cena, radio_bebida))
         else:
-            
-            # CORREGIDO: Eliminado argumento 'size' para evitar fallos
             chk_ayuno = ft.Checkbox(label="Ayuno Matutino Activo", value=main.ayuno_finde, on_change=cambiar_ayuno)
             if main.ayuno_finde:
                 txt_des_finde = "🤐 Estado: Ayuno matutino activado.\n🎯 Objetivo: Llegar limpio al Almuerzo/Comida."
@@ -179,5 +176,3 @@ def main(page: ft.Page):
     actualizar_interfaz()
 
 ft.app(target=main)
-
-python3 ~/Desktop/app_jovi.py
