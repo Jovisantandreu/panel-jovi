@@ -1,4 +1,3 @@
-cat << 'EOF' > ~/Desktop/app_jovi.py
 # -*- coding: utf-8 -*-
 import flet as ft
 from datetime import datetime, timedelta
@@ -112,8 +111,7 @@ def main(page: ft.Page):
             txt_cena = f"🍚 Carbohidrato: {peso_h}g de {hidrato_hoy}\n🥩 Proteína:     {peso_p}g de {prot_cena_hoy}\n🥦 Vegetal:      G: {verdura_hoy} (120g)\n🥑 Grasas/Pan:   {extras}"
             contenido_app.controls.append(crear_tarjeta_comida("Cena", txt_cena, radio_bebida))
         else:
-EOF
-cat << 'EOF' >> ~/Desktop/app_jovi.py
+            
             # CORREGIDO: Eliminado argumento 'size' para evitar fallos
             chk_ayuno = ft.Checkbox(label="Ayuno Matutino Activo", value=main.ayuno_finde, on_change=cambiar_ayuno)
             if main.ayuno_finde:
@@ -181,5 +179,5 @@ cat << 'EOF' >> ~/Desktop/app_jovi.py
     actualizar_interfaz()
 
 ft.app(target=main)
-EOF
+
 python3 ~/Desktop/app_jovi.py
