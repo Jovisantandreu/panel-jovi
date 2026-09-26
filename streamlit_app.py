@@ -12,6 +12,7 @@ def main(page: ft.Page):
     page.padding = 12
     page.theme_mode = ft.ThemeMode.DARK
     
+    # Inicialización de estados persistentes del sistema
     if not hasattr(main, "desplazamiento"): main.desplazamiento = 0
     if not hasattr(main, "logistica"): main.logistica = "En Casa"
     if not hasattr(main, "magdalenas"): main.magdalenas = False
@@ -22,6 +23,7 @@ def main(page: ft.Page):
     dias_traduccion = {0: "Lunes", 1: "Martes", 2: "Miércoles", 3: "Jueves", 4: "Viernes", 5: "Sábado", 6: "Domingo"}
     meses_traduccion = {1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril", 5: "Mayo", 6: "Junio", 7: "Julio", 8: "Agosto", 9: "Septiembre", 10: "Octubre", 11: "Noviembre", 12: "Diciembre"}
 
+    # Contenedor raíz de la interfaz reactiva
     contenido_app = ft.Column(spacing=12, horizontal_alignment=ft.CrossAxisAlignment.STRETCH)
 
     def crear_tarjeta_comida(titulo, texto, control_extra=None):
@@ -126,7 +128,6 @@ def main(page: ft.Page):
             verdura_finde = "Coliflor (120g) [H]" if dia_txt == "Sábado" else "Calabaza al horno (120g)"
             txt_cena_finde = f"🐟 Proteína Nocturna: Pescado blanco (Merluza/Bacalao) o Tortilla francesa.\n🥦 Vegetal: {verdura_finde} de acompañamiento.\n🍚 Hidratos: Reducidos al mínimo por descanso de fin de semana.\n🛑 Alerta: Cero Pan por la noche."
             contenido_app.controls.append(crear_tarjeta_comida("Cena", txt_cena_finde))
-
     def render_vista_semanal():
         contenido_app.controls.append(ft.Text("Resumen Semanal: Platos Principales", weight=ft.FontWeight.BOLD, size=14, text_align=ft.TextAlign.CENTER))
         contenido_app.controls.append(ft.Divider(height=1))
@@ -153,6 +154,7 @@ def main(page: ft.Page):
         elif main.pestaña_activa == 2: render_vista_configuracion()
         page.update()
 
+    # Manejadores de eventos y cambios de estado
     def dia_anterior(e): main.desplazamiento -= 1; actualizar_interfaz()
     def dia_siguiente(e): main.desplazamiento += 1; actualizar_interfaz()
     def cambiar_logistica(e): main.logistica = e.control.value; actualizar_interfaz()
@@ -161,6 +163,7 @@ def main(page: ft.Page):
     def cambiar_bebida(e): main.bebida_cena = e.control.value; actualizar_interfaz()
     def al_cambiar_pestaña(e): main.pestaña_activa = int(e.control.selected_index); actualizar_interfaz()
 
+    # Componente de navegación global
     barra_inferior = ft.NavigationBar(
         destinations=[
             ft.NavigationDestination(icon=ft.Icons.CALENDAR_VIEW_DAY, label="Hoy"),
@@ -172,6 +175,7 @@ def main(page: ft.Page):
         height=65
     )
 
+    # Inyección estable de elementos raíz y renderizado inicial
     page.add(contenido_app, barra_inferior)
     actualizar_interfaz()
 
